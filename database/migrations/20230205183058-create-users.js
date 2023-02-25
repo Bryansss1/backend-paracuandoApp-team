@@ -1,5 +1,7 @@
 //migration de users creada por sequelize-cli y editada por nosotros
+
 //USAR ESTA ESTRUCTURA PARA HACER LAS MIGRACIONES
+
 
 'use strict'
 module.exports = {
@@ -7,7 +9,9 @@ module.exports = {
     const transaction = await queryInterface.sequelize.transaction()
     try {
       await queryInterface.createTable('users', {
+
         id:{
+
           allowNull: false,
           defaultValue: Sequelize.UUIDV4,
           primaryKey: true,
