@@ -1,12 +1,14 @@
-"use strict";
-const uuid = require("uuid");
-const { Op } = require("sequelize");
-const { hashPassword } = require("../../libs/bcrypt");
+'use strict'
+const uuid = require('uuid')
+const { Op } = require('sequelize')
+const { hashPassword } = require('../../libs/bcrypt')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    const transaction = await queryInterface.sequelize.transaction();
+
+    const transaction = await queryInterface.sequelize.transaction()
+
 
     const usersSeeds = [
       {
@@ -21,27 +23,28 @@ module.exports = {
       },
       {
         id: uuid.v4(),
-        first_name: "Bryan",
-        last_name: "Sanabria",
-        email: "gregoria1540@gmail.com",
-        username: "gregoria1540@gmail.com",
-        password: hashPassword("54325432"),
+        first_name: 'bryan',
+        last_name: 'david',
+        email: 'bryan@academlo.com',
+        username: 'bryan@academlo.com',
+        password: hashPassword('12345'),
         created_at: new Date(),
         updated_at: new Date(),
       },
-    ];
+    ]
 
     try {
-      await queryInterface.bulkInsert("users", usersSeeds, { transaction });
+      await queryInterface.bulkInsert('users', usersSeeds, { transaction })
 
-      await transaction.commit();
+      await transaction.commit()
     } catch (error) {
-      await transaction.rollback();
-      throw error;
+      await transaction.rollback()
+      throw error
     }
   },
 
   async down(queryInterface, Sequelize) {
+
     const transaction = await queryInterface.sequelize.transaction();
 
     const userNames = ["danihr1314@gmail.com", "gregoria1540@gmail.com"];
@@ -49,6 +52,7 @@ module.exports = {
     try {
       await queryInterface.bulkDelete(
         "users",
+
         {
           username: {
             [Op.or]: userNames,
@@ -64,3 +68,4 @@ module.exports = {
     }
   },
 };
+
