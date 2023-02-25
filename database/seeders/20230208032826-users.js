@@ -6,16 +6,18 @@ const { hashPassword } = require('../../libs/bcrypt')
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
+
     const transaction = await queryInterface.sequelize.transaction()
+
 
     const usersSeeds = [
       {
         id: uuid.v4(),
-        first_name: 'daniel',
-        last_name: 'ronaldo',
-        email: 'daniel@academlo.com',
-        username: 'daniel@academlo.com',
-        password: hashPassword('12345'),
+        first_name: "Daniel",
+        last_name: "Henao",
+        email: "danihr1314@gmail.com",
+        username: "danihr1314@gmail.com",
+        password: hashPassword("54325432"),
         created_at: new Date(),
         updated_at: new Date(),
       },
@@ -42,27 +44,28 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    const transaction = await queryInterface.sequelize.transaction()
 
-    const userNames = [
-      'example@academlo.com',
-    ]
+    const transaction = await queryInterface.sequelize.transaction();
+
+    const userNames = ["danihr1314@gmail.com", "gregoria1540@gmail.com"];
 
     try {
       await queryInterface.bulkDelete(
-        'users',
+        "users",
+
         {
           username: {
             [Op.or]: userNames,
           },
         },
         { transaction }
-      )
+      );
 
-      await transaction.commit()
+      await transaction.commit();
     } catch (error) {
-      await transaction.rollback()
-      throw error
+      await transaction.rollback();
+      throw error;
     }
   },
-}
+};
+
