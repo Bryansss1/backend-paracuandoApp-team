@@ -10,7 +10,13 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       state_id: {
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "State",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "RESTRICT",
       },
       name: {
         type: Sequelize.STRING,
