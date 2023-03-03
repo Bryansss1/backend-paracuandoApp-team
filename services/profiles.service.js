@@ -27,6 +27,17 @@ class ProfilesService {
     if (!profile) throw new CustomError("Not found profile", 404, "Not Found");
     return profile;
   }
+
+  async isAdmin(user_id){
+    try {
+      const findAdmin=await models.Profiles.findOne({where:{user_id:user_id,role_id:"2"}})
+      if(findAdmin){
+        return true
+      }
+    } catch (error) {
+      throw error
+    }
+  }
 }
 
 module.exports = ProfilesService;

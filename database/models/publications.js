@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         as: "publicationTypes",
         foreignKey: "publication_type_id",
       });
+      
       Publications.hasMany(models.Tags, { as: "tags", foreignKey: "tag_id" });
       Publications.belongsTo(models.Profiles, {
         as: "profile",
