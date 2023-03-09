@@ -1,37 +1,23 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Publications extends Model {
+  class PublicationTypes extends Model {
     static associate(models) {
-      Publications.belongsTo(models.Users, {
-        as: "user",
-        foreignKey: "user_id",
-      });
-      Publications.belongsTo(models.PublicationTypes, {
-        as: "publicationType",
+      PublicationTypes.hasMany(models.Publications, {
+        as: "publications",
         foreignKey: "publication_type_id",
       });
-      Publications.belongsTo(models.Cities, {
-        as: "city",
-        foreignKey: "city_id",
-      });
-      Publications.belongsToMany(models.Users, { through: "Votes" });
-      Publications.belongsToMany(models.Tags, { through: "PublicationsTags" });
     }
   }
-  Publications.init(
+  PublicationTypes.init(
     {
-      user_id: DataTypes.UUID,
-      publication_type_id: DataTypes.INTEGER,
-      city_id: DataTypes.INTEGER,
-      title: DataTypes.STRING,
+      name: DataTypes.STRING,
       description: DataTypes.STRING,
-      content: DataTypes.TEXT,
     },
     {
       sequelize,
-      modelName: "Publications",
+      modelName: "PublicationTypes",
     }
   );
-  return Publications;
+  return PublicationTypes;
 };

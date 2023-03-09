@@ -237,7 +237,6 @@ class UsersService {
       if (prop.id) {
         whereSet.id = prop.id;
       }
-
       let users = await models.Users.findAndCountAll({
         limit: options.limit,
         offset: options.offset,
@@ -248,7 +247,57 @@ class UsersService {
       throw error;
     }
   }
+
+  async getUser(iduser,idlo){
+    try {
+      if(idlo==iduser){
+        const result=await models.Users.scope("view_same_user").findOne({
+          where:{id:iduser},
+          include:[
+            {model:models.Profiles,
+            as:"profiles",
+            attributes:["id","role_id"],
+            include:{
+            model:models.Roles,
+            as:"role",
+            attributes:["name"]
+            }
+            },
+            {model:models.Countries,
+            as:"country",
+            }
+          ]
+        })
+        return result
+      }else{
+        const result=await models.Users.scope("view_public").findOne({
+          where:{id:iduser},
+          include:[
+            {model:models.Profiles,
+              as:"profiles",
+              attributes:["id","role_id"],
+              include:{
+              model:models.Roles,
+              as:"role",
+              attributes:["name"]
+              }
+              },
+              {model:models.Countries,
+              as:"country",
+              }
+          ]
+        })
+        return result
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+
 }
+
+
 
 //Prueba 24-02-2022
 
