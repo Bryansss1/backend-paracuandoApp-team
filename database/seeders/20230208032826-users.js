@@ -13,8 +13,9 @@ module.exports = {
         id: uuid.v4(),
         first_name: "Daniel",
         last_name: "Henao",
-        email: "daniel@academlo.com",
-        username: "daniel@academlo.com",
+        email: "danihr1314@gmail.com",
+        username: "danihr1314@gmail.com",
+
         password: hashPassword("54325432"),
         created_at: new Date(),
         updated_at: new Date(),
