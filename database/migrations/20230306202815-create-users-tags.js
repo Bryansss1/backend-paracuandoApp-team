@@ -2,24 +2,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("cities", {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
+    await queryInterface.createTable("UsersTags", {
+      tag_id: {
+        type: Sequelize.INTEGER,
         primaryKey: true,
-        type: Sequelize.INTEGER,
-      },
-      state_id: {
-        type: Sequelize.INTEGER,
+        allowNull: false,
+        foreignKey: true,
         references: {
-          model: "State",
+          model: "Tags",
           key: "id",
         },
         onUpdate: "CASCADE",
         onDelete: "RESTRICT",
       },
-      name: {
-        type: Sequelize.STRING,
+      user_id: {
+        type: Sequelize.UUID,
+        primaryKey: true,
+        allowNull: false,
+        foreignKey: true,
+        references: {
+          model: "Users",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "RESTRICT",
       },
       createdAt: {
         allowNull: false,
@@ -32,6 +38,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("cities");
+    await queryInterface.dropTable("UsersTags");
   },
 };

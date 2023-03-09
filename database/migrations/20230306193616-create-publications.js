@@ -2,19 +2,19 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("publications", {
+    await queryInterface.createTable("Publications", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
       },
-      profile_id: {
-        type: Sequelize.BIGINT,
+      user_id: {
+        type: Sequelize.UUID,
+        allowNull: true,
         foreignKey: true,
-        allowNull: false,
         references: {
-          model: "Profiles",
+          model: "Users",
           key: "id",
         },
         onUpdate: "CASCADE",
@@ -22,10 +22,10 @@ module.exports = {
       },
       publication_type_id: {
         type: Sequelize.INTEGER,
+        allowNull: true,
         foreignKey: true,
-        allowNull: false,
         references: {
-          model: "PublicationTypes",
+          model: "PublicationsTypes",
           key: "id",
         },
         onUpdate: "CASCADE",
@@ -33,6 +33,8 @@ module.exports = {
       },
       city_id: {
         type: Sequelize.INTEGER,
+        allowNull: true,
+        foreignKey: true,
         references: {
           model: "Cities",
           key: "id",
@@ -47,13 +49,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       content: {
-        type: Sequelize.STRING,
-      },
-      picture: {
-        type: Sequelize.STRING,
-      },
-      image_url: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       createdAt: {
         allowNull: false,
@@ -66,6 +62,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("publications");
+    await queryInterface.dropTable("Publications");
   },
 };
