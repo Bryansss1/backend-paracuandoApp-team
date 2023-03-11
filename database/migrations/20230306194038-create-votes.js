@@ -4,7 +4,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("Votes", {
       publication_id: {
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
         foreignKey: true,
@@ -21,7 +21,7 @@ module.exports = {
         allowNull: false,
         foreignKey: true,
         references: {
-          model: "Users",
+          model: "users",
           key: "id",
         },
       },
