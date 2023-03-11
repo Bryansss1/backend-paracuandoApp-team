@@ -8,14 +8,14 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
       },
       user_id: {
         type: Sequelize.UUID,
         allowNull: true,
         foreignKey: true,
         references: {
-          model: "Users",
+          model: "users",
           key: "id",
         },
         onUpdate: "CASCADE",
@@ -26,7 +26,7 @@ module.exports = {
         allowNull: true,
         foreignKey: true,
         references: {
-          model: "PublicationsTypes",
+          model: "PublicationTypes",
           key: "id",
         },
         onUpdate: "CASCADE",

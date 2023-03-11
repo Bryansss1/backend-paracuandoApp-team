@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       publication_id: {
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
         allowNull: true,
         foreignKey: true,
         references: {
