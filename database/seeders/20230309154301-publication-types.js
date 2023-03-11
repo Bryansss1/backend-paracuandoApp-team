@@ -6,33 +6,19 @@ module.exports = {
     const transaction = await queryInterface.sequelize.transaction();
 
     try {
-      await queryInterface.bulkInsert("tags", [
+      await queryInterface.bulkInsert("publication_types", [
         {
-          name: "Ropa y accesorios",
+          name: "Marcas y tiendas",
+          description: "Marcas, proveedores y tiendas que nos patrocinan",
         },
         {
-          name: "Deportes",
+          name: "Artistas y conciertos",
+          description:
+            "Seccion para encontrar los  artistas y conciertos programados para cada ciudad",
         },
         {
-          name: "Conciertos",
-        },
-        {
-          name: "Meet & Greet",
-        },
-        {
-          name: "E-sport",
-        },
-        {
-          name: "Pop/Rock",
-        },
-        {
-          name: "Tecnologia",
-        },
-        {
-          name: "Hogar y Decoracion",
-        },
-        {
-          name: "Abastecimiento",
+          name: "Torneos",
+          description: "Competencias programadas hasta la fecha",
         },
       ]);
 
@@ -45,7 +31,7 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete(
-      "tags",
+      "publication_types",
       {
         name: [null],
       },
